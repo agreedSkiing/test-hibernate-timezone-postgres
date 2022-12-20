@@ -104,4 +104,64 @@ public class Time {
       )
       .build();
   }
+
+  @POST
+  @Path("instants")
+  public Response createInstants() {
+    var entity = repo.createInstants();
+    return Response
+      .ok(
+        new Builder()
+          .withTimezoneField(entity.withTimeZone.toString())
+          .withTimezoneGmt2Field(entity.withTimeZoneGmt2.toString())
+          .withoutTimezoneField(entity.noTimeZone.toString())
+          .build()
+      )
+      .build();
+  }
+
+  @POST
+  @Path("localdatetimes")
+  public Response createLocaldatetimes() {
+    var entity = repo.createLocalDateTimes();
+    return Response
+      .ok(
+        new Builder()
+          .withTimezoneField(entity.withTimeZone.toString())
+          .withTimezoneGmt2Field(entity.withTimeZoneGmt2.toString())
+          .withoutTimezoneField(entity.noTimeZone.toString())
+          .build()
+      )
+      .build();
+  }
+
+  @POST
+  @Path("offsetdatetimes")
+  public Response createOffsetdatetimes() {
+    var entity = repo.createOffsetDateTimes();
+    return Response
+      .ok(
+        new Builder()
+          .withTimezoneField(entity.withTimeZone.toString())
+          .withTimezoneGmt2Field(entity.withTimeZoneGmt2.toString())
+          .withoutTimezoneField(entity.noTimeZone.toString())
+          .build()
+      )
+      .build();
+  }
+
+  @POST
+  @Path("zoneddatetimes")
+  public Response createZoneddatetimes() {
+    var entity = repo.createZonedDateTimes();
+    return Response
+      .ok(
+        new Builder()
+          .withTimezoneField(entity.withTimeZone.toString())
+          .withTimezoneGmt2Field(entity.withTimeZoneGmt2.toString())
+          .withoutTimezoneField(entity.noTimeZone.toString())
+          .build()
+      )
+      .build();
+  }
 }
