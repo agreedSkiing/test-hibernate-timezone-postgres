@@ -25,14 +25,15 @@ bash integration-test.sh
 Formatting is done by prettier and its plugins:
 
 ```bash script
-npm install; npx prettier --write .
+npm install
+npx prettier --write .
 ```
 
 ## Reason for project
 
 This project was created to test the connection time to postgres database with Etc/GMT-1 time zone (GMT+1).
 
-Test passes as expected
+One test fails [GmtPodUtcDbTest.java] which fails in both here with base Hibernate Orm and Hibernate Reactive because of an unkown weird conversion reason when the database connection has UTC specified and the test class uses QuarkusTestResourceLifecycleManager [GmtPlusOne.java] which assigns `user.timezone=Etc/GMT-1` through a quarkus test resource, which confuses me since it should produce the same results as [TimeTest.java] which when run throught [integration-test.sh] launches the mvn command `mvn clean package -Duser.timezone=Etc/GMT-1`.
 
 ### Database looks
 
@@ -60,3 +61,8 @@ c7b596f783c9:/# date
 Mon Dec 19 07:33:42 UTC 2022
 c7b596f783c9:/#
 ```
+
+[timetest.java]: ./src/test/java/org/acme/endpoints/time/TimeTest.java
+[gmtplusone.java]: ./src/test/java/org/acme/test/resources/GmtPlusOne.java
+[integration-test.sh]: ./integration-test.sh
+[gmtpodutcdbtest.java]: ./src/test/java/org/acme/endpoints/time/GmtPodUtcDbTest.java
